@@ -8,7 +8,7 @@ on:
 jobs:
   gcloud:
     env:
-      deploy: "true"
+      deploy: "false"
     steps:
       - uses: docker://kiwigrid/gcloud-kubectl-helm:latest
         name: Create credential file from secret
@@ -35,5 +35,4 @@ jobs:
           gcloud auth login --cred-file=${HOME}/.kube/config.json 
           gcloud config set project mlcbplatformproject
           gcloud container clusters get-credentials mlcb-platform-cluster-ap002 --region us-east1 --project mlcbplatformproject 
-          kubectl delete service deployment-mlcb
-          kubectl delete deployment deployment-mlcb
+          helm uninstall mysql-1708340412
