@@ -8,7 +8,7 @@ on:
 jobs:
   gcloud:
     env:
-      deploy: "true"
+      deploy: "false"
     steps:
       - uses: docker://kiwigrid/gcloud-kubectl-helm:latest
         name: Create credential file from secret
