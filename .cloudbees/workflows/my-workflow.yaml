@@ -18,15 +18,6 @@ jobs:
           ${{ secrets.mlcbMultilinePass }}
           EOF
       - uses: docker://kiwigrid/gcloud-kubectl-helm:latest
-        name: Google Cloud authentication and HELM creation
-        run: |
-          gcloud auth login --cred-file=${HOME}/.kube/config.json 
-          gcloud config set project mlcbplatformproject
-          gcloud container clusters get-credentials mlcb-platform-cluster-ap002 --region us-east1 --project mlcbplatformproject 
-          helm create what-the-helm
-          helm install what-the helm what-the-helm/
-      
-      - uses: docker://kiwigrid/gcloud-kubectl-helm:latest
         if: ${{ env.deploy == 'true'}}
         name: Google Cloud authentication and HELM deployment
         run: |
